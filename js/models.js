@@ -73,6 +73,7 @@ class StoryList {
    * Returns the new Story instance
    */
 
+  // Function is called on stories.js
   async addStory( user, {title, author, url}) {
     // UNIMPLEMENTED: complete this function!
     const token = user.loginToken;

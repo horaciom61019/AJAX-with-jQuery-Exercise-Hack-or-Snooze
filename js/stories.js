@@ -50,3 +50,29 @@ function putStoriesOnPage() {
 
   $allStoriesList.show();
 }
+
+/** Handle submitting new story form. */
+async function submitNewStory (evt){
+  console.debug("submitNewStory");
+  evt.preventDefault();
+
+  //Gets all the info about the story from Form
+  const author = $("#create-author").val();
+  const title = $("#create-title").val();
+  const url = $("#create-url").val();
+  const username = currentUser.username;
+  const storyData = {author, title, url, username};
+
+  // Calls addStory() from models.js
+  const story = await storyList.addStory(currentUser, storyData);
+
+  const $story = generateStoryMarkup(story);
+  // prepends story at the beginning of the StoryLists.
+  $allStoriesList.prepend($story);
+
+  // Hides and resets form
+  $submitForm.slideUp("slow");
+  $submitForm.trigger("reset");
+};
+
+$submitForm.on("submit", submitNewStory);
