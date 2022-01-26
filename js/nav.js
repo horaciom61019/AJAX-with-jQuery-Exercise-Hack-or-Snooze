@@ -36,10 +36,9 @@ function updateNavOnLogin() {
 }
 
 /** Show story submit form on clicking "submit" */
-
 function navSubmitStoryClick(evt) {
   console.debug("navSubmitStoryClick", evt);
-  hidePageComponents();
+  hidePageComponents(); // Function can be found in main.js
   $allStoriesList.show();
   $submitForm.show();
 }

@@ -10,7 +10,6 @@ const $allStoriesList = $("#all-stories-list");
 /** Story submission. Nav.js references these variables to add a new story. */
 const $submitForm = $("#submit-form");
 const $navSubmitStory = $("#nav-submit-story");
-// const $submitForm = $("#submit-form");
 
 
 const $loginForm = $("#login-form");
