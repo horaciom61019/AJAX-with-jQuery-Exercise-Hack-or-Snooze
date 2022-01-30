@@ -11,13 +11,18 @@ const $allStoriesList = $("#all-stories-list");
 const $submitForm = $("#submit-form");
 const $navSubmitStory = $("#nav-submit-story");
 
-
 const $loginForm = $("#login-form");
 const $signupForm = $("#signup-form");
 
 const $navLogin = $("#nav-login");
 const $navUserProfile = $("#nav-user-profile");
 const $navLogOut = $("#nav-logout");
+
+const $favoritedStories = $("#favorited-stories");
+
+// finds all three story lists
+const $storiesLists = $(".stories-list");
+
 
 /** To make it easier for individual components to show just themselves, this
  * is a useful function that hides pretty much everything on the page. After

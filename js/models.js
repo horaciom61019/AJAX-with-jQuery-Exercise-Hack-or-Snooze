@@ -210,4 +210,46 @@ class User {
       return null;
     }
   }
+
+  /** Update API with favorite/not-favorite.
+   *   - newState: "add" or "remove"
+   *   - story: Story instance to make favorite / not favorite
+  */
+
+  // _ is used to preface the name of an object's property or method 
+  // that is private. This is a quick and easy way to immediately identify 
+  // a private class member
+  async _addOrRemoveFavorite(newState, story){
+    // Checks current state of story (if fav or unfav) 
+    const method = newState === "add" ? "POST" : "DELETE";
+    const token = this.loginToken;
+
+    await axios({
+      url: `${BASE_URL}/users/${this.username}/favorites/${story.storyId}`,
+      method: method,
+      data: { token },
+    });
+  };
+
+  /** Add a story to the list of user favorites and update the API
+   * - story: a Story instance to add to favorites
+  */
+  async addFavorite(story){
+    this.favorites.push(story);
+    await this._addOrRemoveFavorite("add", story);
+  };
+
+  /** Remove a story to the list of user favorites and update the API
+   * - story: the Story instance to remove from favorites
+  */
+  async removeFavorite(story){
+    //filters stories, return true if favorite story is not in storylist 
+    this.favorites = this.favorites.filter(s => s.storyId !== story.storyId);
+    await this._addOrRemoveFavorite("remove", story);
+  };
+
+  /** Return true/false if Story instance is a favorite of this user. */
+  isFavorite(story) {
+    return this.favorites.some(s => (s.storyId === story.storyId));
+  }
 }
