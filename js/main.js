@@ -4,25 +4,26 @@
 
 const $body = $("body");
 
+/** Story Lists */
+const $storiesLists = $(".stories-list");
 const $storiesLoadingMsg = $("#stories-loading-msg");
 const $allStoriesList = $("#all-stories-list");
+
 const $ownStories = $("#my-stories");
+const $favoritedStories = $("#favorited-stories");
 
 /** Story submission. Nav.js references these variables to add a new story. */
 const $submitForm = $("#submit-form");
 const $navSubmitStory = $("#nav-submit-story");
 
+/**  User's forms and profile */
 const $loginForm = $("#login-form");
 const $signupForm = $("#signup-form");
+const $userProfile = $("#user-profile");
 
 const $navLogin = $("#nav-login");
 const $navUserProfile = $("#nav-user-profile");
 const $navLogOut = $("#nav-logout");
-
-const $favoritedStories = $("#favorited-stories");
-
-// finds all three story lists
-const $storiesLists = $(".stories-list");
 
 
 /** To make it easier for individual components to show just themselves, this
@@ -30,11 +31,15 @@ const $storiesLists = $(".stories-list");
  * calling this, individual components can re-show just what they want.
  */
 
+// Function is called on users.js and nav.js
 function hidePageComponents() {
   const components = [
     $allStoriesList,
+    $storiesLists,
     $loginForm,
     $signupForm,
+    $submitForm,
+    $userProfile
   ];
   components.forEach(c => c.hide());
 }

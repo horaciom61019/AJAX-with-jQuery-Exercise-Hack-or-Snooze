@@ -25,8 +25,9 @@ class Story {
 
   getHostName() {
     // UNIMPLEMENTED: complete this function!
-    return "hostname.com";
+    return new URL(this.url).host;
   }
+  
 }
 
 
@@ -47,6 +48,7 @@ class StoryList {
    *  - returns the StoryList instance.
    */
 
+  // Function is called on stories.js, getAndShowStoriesOnStart()
   static async getStories() {
     // Note presence of `static` keyword: this indicates that getStories is
     //  **not** an instance method. Rather, it is a method that is called on the
@@ -73,7 +75,7 @@ class StoryList {
    * Returns the new Story instance
    */
 
-  // Function is called on stories.js
+  // // Function is called on stories.js, submitNewStory()
   async addStory( user, {title, author, url}) {
     // UNIMPLEMENTED: complete this function!
     const token = user.loginToken;
@@ -98,8 +100,10 @@ class StoryList {
    * - user: the current User instance
    * - storyId: the ID of the story you want to remove
   */
+  // Function is called on stories.js, deleteStory()
   async removeStory(user, storyId) {
     const token = user.loginToken;
+    // Sends request
     await axios({
       url: `${BASE_URL}/stories/${storyId}`,
       method: "DELETE",
@@ -240,7 +244,7 @@ class User {
   // that is private. This is a quick and easy way to immediately identify 
   // a private class member
   async _addOrRemoveFavorite(newState, story){
-    // Checks current state of story (if fav or unfav) 
+    // Checks current state of story (if fav or unfav)
     const method = newState === "add" ? "POST" : "DELETE";
     const token = this.loginToken;
 
@@ -254,6 +258,8 @@ class User {
   /** Add a story to the list of user favorites and update the API
    * - story: a Story instance to add to favorites
   */
+
+  // Function is called on stories.js, toggleStoryFavorite()
   async addFavorite(story){
     this.favorites.push(story);
     await this._addOrRemoveFavorite("add", story);
@@ -262,6 +268,7 @@ class User {
   /** Remove a story to the list of user favorites and update the API
    * - story: the Story instance to remove from favorites
   */
+  // Function is called on stories.js, toggleStoryFavorite()
   async removeFavorite(story){
     //filters stories, return true if favorite story is not in storylist 
     this.favorites = this.favorites.filter(s => s.storyId !== story.storyId);
@@ -269,9 +276,9 @@ class User {
   };
 
   /** Return true/false if Story instance is a favorite of this user. */
+  // Function is called on models.js, getStarHTML()
   isFavorite(story) {
     return this.favorites.some(s => (s.storyId === story.storyId));
   }
 
-  
 }

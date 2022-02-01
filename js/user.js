@@ -13,7 +13,7 @@ async function login(evt) {
   console.debug("login", evt);
   evt.preventDefault();
 
-  // grab the username and password
+  // grabs the username and password
   const username = $("#login-username").val();
   const password = $("#login-password").val();
 
@@ -82,6 +82,14 @@ async function checkForRememberedUser() {
   currentUser = await User.loginViaStoredCredentials(token, username);
 }
 
+function generateUserProfile() {
+  console.debug("generateUserProfile");
+
+  $("#profile-name").text(currentUser.name);
+  $("#profile-username").text(currentUser.username);
+  $("#profile-account-date").text(currentUser.createdAt.slice(0, 10));
+}
+
 /** Sync current user information to localStorage.
  *
  * We store the username/token in localStorage so when the page is refreshed
@@ -110,7 +118,9 @@ function saveUserCredentialsInLocalStorage() {
 function updateUIOnUserLogin() {
   console.debug("updateUIOnUserLogin");
   hidePageComponents();
+  putStoriesOnPage();
   $allStoriesList.show();
 
+  generateUserProfile();
   updateNavOnLogin();
 }

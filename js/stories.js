@@ -6,6 +6,7 @@ let storyList;
 /** Get and show stories when site first loads. */
 
 async function getAndShowStoriesOnStart() {
+  //Calls getStories() from models.js
   storyList = await StoryList.getStories();
   $storiesLoadingMsg.remove();
 
@@ -84,6 +85,7 @@ $submitForm.on("submit", submitNewStory);
 
 /** Add fav/not-fav star to story */
 function getStarHTML(story, user){
+  // isFavorite() called from models.js
   const isFav = user.isFavorite(story);
   const starType = isFav ? "fas" : "far";
   
@@ -128,12 +130,12 @@ async function toggleStoryFavorite(evt) {
   // see if the item is already favorited (checking by presence of star)
   if ($tgt.hasClass("fas")) {
     // currently a favorite: remove from user's fav list and change star
-    // removeFavorite() from models.js
+    // removeFavorite() is called from models.js
     await currentUser.removeFavorite(story);
     $tgt.closest("i").toggleClass("fas far");
   } else {
     // currently not a favorite, favorite story. 
-    // addFavorite() from models.js
+    // addFavorite() called from models.js
     await currentUser.addFavorite(story);
     $tgt.closest("i").toggleClass("fas far");
   }
@@ -141,7 +143,8 @@ async function toggleStoryFavorite(evt) {
 
 $storiesLists.on("click", ".star", toggleStoryFavorite);
 
-/** Make delete button HTML for story */
+
+/** Creates delete button HTML for story */
 
 function getDeleteBtnHTML() {
   return `
@@ -159,7 +162,7 @@ async function deleteStory(evt) {
   const $closestLi = $(evt.target).closest("li");
   const storyId = $closestLi.attr("id");
 
-  // removeStory() from models.js
+  // removeStory() called from models.js
   await storyList.removeStory(currentUser, storyId);
 
   // re-generate story list
@@ -184,8 +187,8 @@ function putUserStoriesOnPage() {
     for (let story of currentUser.ownStories) {
       let $story = generateStoryMarkup(story, true);
       $ownStories.append($story);
-    }
-  }
+    };
+  };
 
   $ownStories.show();
 }

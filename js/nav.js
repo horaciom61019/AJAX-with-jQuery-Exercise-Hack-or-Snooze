@@ -65,3 +65,13 @@ function navMyStories(evt) {
 }
 
 $body.on("click", "#nav-my-stories", navMyStories);
+
+/** Hide everything but profile on click on "profile" */
+
+function navProfileClick(evt) {
+  console.debug("navProfileClick", evt);
+  hidePageComponents();
+  $userProfile.show();
+}
+
+$navUserProfile.on("click", navProfileClick);
