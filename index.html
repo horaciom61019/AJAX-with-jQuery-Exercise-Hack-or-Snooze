@@ -41,6 +41,11 @@
     |
     <!-- Onclick, submission form will show-->
     <a class="nav-link" href="#" id="nav-submit-story">submit</a>
+    |
+    <a class="nav-link" href="#" id="nav-favorites">favorites</a>
+    |
+    <!-- A non-breaking space (&nbsp) is a space that will not break into a new line.-->
+    <a class="nav-link" href="#" id="nav-my-stories">my&nbsp;stories</a>
   </div>
   <div class="nav-right">
     <a class="nav-link" href="#" id="nav-login">login/signup</a>
@@ -76,6 +81,11 @@
   <!-- List of all stories -->
   <ol id="all-stories-list" class="stories-list"></ol>
 
+  <!-- List of stories favorited by the user -->
+  <ol id="favorited-stories" class="hidden stories-list"></ol>
+
+  <!-- List of stories by the user -->
+  <ol id="my-stories" class="hidden stories-list"></ol>
 </section>
 
 <!-- Login and signup forms -->

@@ -6,6 +6,7 @@ const $body = $("body");
 
 const $storiesLoadingMsg = $("#stories-loading-msg");
 const $allStoriesList = $("#all-stories-list");
+const $ownStories = $("#my-stories");
 
 /** Story submission. Nav.js references these variables to add a new story. */
 const $submitForm = $("#submit-form");
